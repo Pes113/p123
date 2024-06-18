@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pes.mapper.BoardAttachMapper">
+
+	<insert id="insert">
+		INSERT INTO TBL_ATTACH (UUID, UPLOADPATH, FILENAME, FILETYPE, BNO)
+		VALUES (#{uuid}, #{uploadpath}, #{filename}, #{filetype}, #{bno})
+	</insert>
+	
+	<select id="getAttachList" resultType="pes.domain.BoardAttachVO">
+		SELECT UUID, UPLOADPATH, FILENAME, FILETYPE, BNO FROM TBL_ATTACH WHERE BNO=#{bno}
+	</select>
+	
+	<delete id="remove">
+		DELETE FROM TBL_ATTACH
+		WHERE BNO = #{bno}
+	</delete>
+	
+</mapper>

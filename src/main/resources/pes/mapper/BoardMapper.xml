@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pes.mapper.BoardMapper">
+
+	<insert id="insert">
+		INSERT INTO TBL_BOARD (TITLE, CONTENT, WRITER)
+		VALUES (#{title}, #{content}, #{writer})
+		<selectKey keyProperty="bno" resultType="long" order="AFTER">
+			SELECT TBL_BOARD_SEQ.CURRVAL AS BNO FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<select id="select_all" resultType="pes.domain.BoardVO">
+		<![CDATA[select /*+index_desc(tbl_board tbl_board_pk)*/
+			ROWNUM RN, BNO, TITLE, CONTENT, WRITER, REDATE, UPDATEDATE
+			FROM TBL_BOARD]]>
+	</select>
+	
+	<select id="get_board" resultType="pes.domain.BoardVO">
+		SELECT BNO, TITLE, CONTENT, WRITER, REDATE, UPDATEDATE FROM TBL_BOARD
+		WHERE BNO = #{bno}
+	</select>
+	
+	<update id="modify_board">
+		UPDATE TBL_BOARD SET TITLE = #{title}, CONTENT = #{content}
+		WHERE BNO = #{bno}
+	</update>
+	
+	<delete id="board_remove">
+		DELETE FROM TBL_BOARD
+		WHERE BNO = #{bno}
+	</delete>
+	
+	<select id="getListWithPaging" resultType="pes.domain.BoardVO">
+		<![CDATA[
+		SELECT BNO, TITLE, CONTENT, WRITER, REDATE, UPDATEDATE
+		FROM 
+		(SELECT /*+INDEX_DESC(TBL_BOARD TBL_BOARD_PK) */
+		ROWNUM RN, BNO, TITLE, CONTENT, WRITER, REDATE, UPDATEDATE
+		FROM TBL_BOARD WHERE]]>
+		<![CDATA[ ROWNUM <= #{pageNum} * #{amount}
+		)
+		WHERE RN > (#{pageNum}-1) * #{amount}]]>
+	</select>
+	
+<!-- 	<select id="getListWithPaging" resultType="com.joongang.domain.BoardVO">
+		SELECT ROWNUM RN, BNO, TITLE, CONTENT, WRITER, REDATE, UPDATEDATE
+		FROM (SELECT ROWNUM RN, BNO, TITLE, CONTENT, WRITER, REDATE, UPDATEDATE FROM TBL_BOARD) T
+		<![CDATA[WHERE R.RN > #{pageNum} AND R.RN <= #{amount}]]>
+	</select> -->
+	
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) FROM TBL_BOARD
+	</select>
+</mapper>
