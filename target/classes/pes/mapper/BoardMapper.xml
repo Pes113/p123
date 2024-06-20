@@ -11,7 +11,10 @@
 			SELECT TBL_BOARD_SEQ.CURRVAL AS BNO FROM DUAL
 		</selectKey>
 	</insert>
-	
+	<delete id="user_board_delete">
+		DELETE FROM TBL_BOARD
+		WHERE WRITER = #{user_id}
+	</delete>
 	<select id="select_all" resultType="pes.domain.BoardVO">
 		<![CDATA[select /*+index_desc(tbl_board tbl_board_pk)*/
 			ROWNUM RN, BNO, TITLE, CONTENT, WRITER, REDATE, UPDATEDATE

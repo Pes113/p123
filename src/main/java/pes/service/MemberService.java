@@ -20,14 +20,24 @@ public class MemberService{
 	@Setter(onMethod_ = { @Autowired })
 	private PasswordEncoder pwencoder;
 	
+	public int modify_sign(MemberVO vo) {
+		vo.setUser_pw(pwencoder.encode(vo.getUser_pw()));
+		System.out.println(vo);
+		return membermapper.modifyMember(vo);
+	}
+	
 	public void signup(MemberVO vo) {
 		vo.setUser_pw(pwencoder.encode(vo.getUser_pw()));
 		membermapper.insertMember(vo);
 	}
 	
-//	public MemberVO login(MemberVO vo) {
-//		return membermapper.selectMemberByUserid(vo.getUser_id());
-//	}
+	public int delete_sign(String user_id) {
+		return membermapper.deleteMember(user_id);
+	}
+	
+	public MemberVO select_Id(String user_id) {
+		return membermapper.selectMemberByUserid(user_id);
+	}
 	
 	public AuthVO authenticate(MemberVO vo) throws Exception {
 		MemberVO re = membermapper.selectMemberByUserid(vo.getUser_id());
@@ -40,4 +50,5 @@ public class MemberService{
 		AuthVO avo = new AuthVO(re.getUser_id(), re.getUser_name());
 		return avo;
 	}
+
 }

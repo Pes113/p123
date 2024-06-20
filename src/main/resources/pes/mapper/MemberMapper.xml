@@ -12,4 +12,13 @@
 		select * from tbl_member where user_id = #{user_id}
 	</select>
 	
+	<delete id="deleteMember">
+		delete from TBL_MEMBER where user_id = #{user_id}	
+	</delete>
+	
+	<update id="modifyMember">
+		update TBL_MEMBER set user_name = #{user_name},
+		user_pw = #{user_pw}, location = #{location}, gender = #{gender}
+		where user_id = #{user_id}
+	</update>
 </mapper>

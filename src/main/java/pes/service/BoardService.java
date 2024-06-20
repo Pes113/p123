@@ -87,4 +87,8 @@ public class BoardService {
 	public List<BoardAttachVO> getAttachList(Long bno) {
 		return attachmapper.getAttachList(bno);
 	}
+
+	public int user_board_remove(String user_id) {
+		return boardmapper.user_board_delete(user_id);
+	}
 }

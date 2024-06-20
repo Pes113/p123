@@ -38,7 +38,7 @@
 		width : 10px;
 	}
 	#signup_body {
-		padding-top : 130px;
+		padding-top : 160px;
 		width:100%;
 	}
 	input {

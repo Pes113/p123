@@ -107,4 +107,31 @@ public class MemberController {
 	public String get_mypage() {
 		return "member/mypage";
 	}
+	
+	@PostMapping("/mypage")
+	public String modify_mypage(MemberVO vo, HttpSession session, RedirectAttributes rttr) {
+		String user_id = ((AuthVO) session.getAttribute("auth")).getUser_id();
+		MemberVO prev_vo = memberService.select_Id(user_id);
+		if(vo.getUser_name() == "") {	}
+		else {	//	이름 변경
+			prev_vo.setUser_name(vo.getUser_name());
+		}
+		if(vo.getLocation() == "-선택-") {	}
+		else {	//	지역 변경
+			prev_vo.setUser_name(vo.getUser_name());
+		}
+		prev_vo.setUser_pw(vo.getUser_pw());
+		memberService.modify_sign(prev_vo);
+		session.removeAttribute("auth");
+		return "redirect:/";
+	}
+	
+	@PostMapping("/remove")
+	public String sign_remove( HttpSession session, RedirectAttributes rttr) {
+		AuthVO avo = (AuthVO)session.getAttribute("auth");
+		session.removeAttribute("auth");
+		boardService.user_board_remove(avo.getUser_id());
+		memberService.delete_sign(avo.getUser_id());
+		return "/home";
+	}
 }

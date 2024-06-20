@@ -11,7 +11,7 @@
 		float: left;
 		text-align: center;
 		width : 100%;
-		height : 400px;
+		height : 250px;
 	}
 	}
 	.login {

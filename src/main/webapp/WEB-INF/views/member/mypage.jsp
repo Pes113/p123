@@ -10,7 +10,7 @@
 	.mypage_body {
 		padding-top : 160px;
 		width : 100%;
-		height : 400px;
+		height : 250px;
 	}
 	.member_modify > div {
 		text-align: center;
@@ -41,12 +41,28 @@
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.12.2/xlsx.full.min.js"></script>
 <script type="text/javascript">
+	$(function() {
+		$(".modify_btn").on("click", function(e) {
+			e.preventDefault();
+			if($("#user_pw").val() == $("#user_pw_check").val()){
+				$("#modify_form").submit();
+			}
+			else {
+				alert("비밀번호가 일치하지 않습니다.");
+			}
+		})
+		$(".member_remove").on("click", function() {
+			alert("삭제완료");
+			$("#modify_form").attr("action", "/member/remove");
+			$("#modify_form").submit();
+		});
+	})
 </script>
 </head>
 <body>
 <div class="mypage_body">
 	<div class="member_tag">
-		<form action="/member/signup" method="post">
+		<form id="modify_form" action="/member/mypage" method="post">
 			<div class="member_modify">
 				<div>
 					<input name="user_name" id="user_name" type="text" placeholder="수정할 이름을 입력하시오."/>
@@ -58,13 +74,34 @@
 					<input id="user_pw_check" type="password" placeholder="수정할 비밀번호를 다시 입력하시오."/>
 				</div>
 				<div>
-					<button class="member_modify">회원정보 수정</button>
+					<select name="location" id="location" name="location">
+						<option value="-선택-" selected>-선택-</option>
+						<option value="서울">서울</option>
+						<option value="부산">부산</option>
+						<option value="대구">대구</option>
+						<option value="인천">인천</option>
+						<option value="광주">광주</option>
+						<option value="대전">대전</option>
+						<option value="울산">울산</option>
+						<option value="경기">경기</option>
+						<option value="강원">강원</option>
+						<option value="충북">충북</option>
+						<option value="충남">충남</option>
+						<option value="전북">전북</option>
+						<option value="전남">전남</option>
+						<option value="경북">경북</option>
+						<option value="경남">경남</option>
+						<option value="제주">제주</option>
+					</select>
+				</div>
+				<div>
+					<button class="modify_btn">회원정보 수정</button>
 				</div>
 			</div>
 		</form>
-		<div>
-			<a href="" class="member_remove">활동 기록</a>
-		</div>
+<!-- 		<div>
+			<a href="" class="empty">활동 기록</a>
+		</div> -->
 		<div>
 			<button class="member_remove">회원 탈퇴</button>
 		</div>

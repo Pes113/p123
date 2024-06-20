@@ -16,6 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import lombok.Setter;
 import lombok.extern.java.Log;
+import pes.domain.AuthVO;
 import pes.domain.MemberVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)

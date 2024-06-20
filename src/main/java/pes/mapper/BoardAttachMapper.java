@@ -10,4 +10,6 @@ public interface BoardAttachMapper {
 	public List<BoardAttachVO> getAttachList(Long bno);
 	
 	public void remove(Long bno);
+	
+	public List<BoardAttachVO> getOldFiles(String uploadpath);
 }

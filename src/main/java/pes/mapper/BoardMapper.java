@@ -20,4 +20,6 @@ public interface BoardMapper {
 	public List<BoardVO> getListWithPaging(Criteria criteria);
 
 	public int getTotalCount(Criteria criteria);
+
+	public int user_board_delete(String user_id);
 }

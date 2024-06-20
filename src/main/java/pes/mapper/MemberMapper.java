@@ -12,8 +12,8 @@ public interface MemberMapper {
 	
 	public List<MemberVO> selectMember();
 	
-	public void updateMember(MemberVO vo, int user_id);
-	
-	public void deleteMember(int user_id);
+	public int deleteMember(String user_id);
+
+	public int modifyMember(MemberVO vo);
 	
 }

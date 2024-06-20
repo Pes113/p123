@@ -74,8 +74,8 @@ public class BoardController {
 	}
 	
 	@PostMapping("/remove")
-	public String get_remove(Model model, Long bno, Criteria criteria, RedirectAttributes rttr) {
-		boardService.board_remove(bno);
+	public String get_remove(Model model, Long bno, Criteria criteria,
+			RedirectAttributes rttr) {
 		List<BoardAttachVO> attachList = boardService.getAttachList(bno);
 		if(boardService.board_remove(bno)) {
 			deleteFiles(attachList);
