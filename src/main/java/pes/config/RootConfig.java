@@ -22,7 +22,7 @@ import com.zaxxer.hikari.HikariDataSource;
 //	public MemberRegisterService memberRegisterSvc() {
 //		return new MemberRegisterService();
 //	}
-//}
+//} 하남자
 
 @Configuration
 @ComponentScan(basePackages = {"pes.service", "pes.task"})
