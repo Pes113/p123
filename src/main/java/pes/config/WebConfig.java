@@ -36,7 +36,7 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 	protected void customizeRegistration(ServletRegistration.Dynamic registration) {
 		registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
 		MultipartConfigElement multipartConfig = new MultipartConfigElement(
-				"C:\\Users\\dmstk\\upload",
+				"storage address",
 				5*1024*1024,	// max file size
 				40*1024*1024,	// max total size
 				5*1024*1024);	// 
